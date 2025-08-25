@@ -1,5 +1,5 @@
 const cheerio = require("cheerio");
-const Telenode = require("telenode-js");
+const bot = require("./TelegramBot");
 const fs = require("fs");
 const config = require("./config.json");
 const { getYad2HTML, getItemIdFromUrl } = require("./utils");
@@ -104,11 +104,8 @@ const checkIfHasNewItem = async (itemUrls, topic) => {
 };
 
 const scrape = async (topic, url) => {
-  const apiToken = process.env.TELEGRAM_API_TOKEN;
-  const chatId = process.env.TELEGRAM_CHAT_ID;
-  const telenode = new Telenode({ apiToken });
   try {
-    await telenode.sendTextMessage(`Scanning ${topic} ...`, chatId);
+    await bot.sendMessage(`Scanning ${topic} ...`);
     const scrapeImgResults = await scrapeAllPagesAndExtractImgUrls(
       url,
       config.maxPages
@@ -117,22 +114,16 @@ const scrape = async (topic, url) => {
     if (newItems.length > 0) {
       const newItemsJoined = newItems.join("\n----------\n");
       const msg = `${newItems.length} new items:\n${newItemsJoined}`;
-      await telenode.sendTextMessage(msg, chatId);
+      await bot.sendMessage(msg);
     } else {
-      await telenode.sendTextMessage(
-        `No new items were added for topic ${topic}`,
-        chatId
-      );
+      await bot.sendMessage(`No new items were added for topic ${topic}`);
     }
   } catch (e) {
     let errMsg = e?.message || "";
     if (errMsg) {
       errMsg = `Error: ${errMsg}`;
     }
-    await telenode.sendTextMessage(
-      `Scan workflow failed... 😥\n${errMsg}`,
-      chatId
-    );
+    await bot.sendMessage(`Scan workflow failed... 😥\n${errMsg}`);
     throw new Error(e);
   }
 };
