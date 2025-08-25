@@ -130,18 +130,14 @@ const scrape = async (topic, url) => {
 };
 
 const main = async () => {
-  await Promise.all(
-    config.projects
-      .filter((project) => {
-        if (project.disabled) {
-          console.log(`Topic "${project.topic}" is disabled. Skipping.`);
-        }
-        return !project.disabled;
-      })
-      .map(async (project) => {
-        await scrape(project.topic, project.url);
-      })
-  );
+  for (let i = 0; i < config.projects.length; i++) {
+    const project = config.projects[i];
+    if (project.disabled) {
+      console.log(`Topic "${project.topic}" is disabled. Skipping.`);
+      continue;
+    }
+    await scrape(project.topic, project.url);
+  }
 };
 
 main();
