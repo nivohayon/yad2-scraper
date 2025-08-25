@@ -3,7 +3,6 @@ const bot = require("./TelegramBot");
 const fs = require("fs");
 const config = require("./config.json");
 const { getYad2HTML, getItemIdFromUrl } = require("./utils");
-require("dotenv").config();
 
 const scrapeItemsAndExtractUrls = async (url) => {
   // Get Yad2 HTML.

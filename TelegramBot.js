@@ -1,4 +1,5 @@
 const Telenode = require("telenode-js");
+require("dotenv").config();
 
 const MAX_MESSAGE_LENGTH = 4096;
 
