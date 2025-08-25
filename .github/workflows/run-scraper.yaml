@@ -22,8 +22,8 @@ jobs:
 
       - name: Run scraper
         env:
-          API_TOKEN: ${{ secrets.TELEGRAM_API_TOKEN }}
-          CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+          TELEGRAM_API_TOKEN: ${{ secrets.TELEGRAM_API_TOKEN }}
+          TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
         run: node scraper.js
 
       - name: Commit and push changes in data folder
