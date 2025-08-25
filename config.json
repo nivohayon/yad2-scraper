@@ -1,10 +1,15 @@
 {
-  "telegramApiToken": null,
-  "chatId": null,
+  "maxPages": 0,
   "projects": [
     {
-      "topic": "",
-      "url": ""
+      "topic": "Houses In Netanya",
+      "url": "https://www.yad2.co.il/realestate/rent?minPrice=3000&maxPrice=5000&minEntranceDate=1759276800&priceOnly=1&shelter=1&topArea=19&area=17&city=7400",
+      "disabled": false
+    },
+    {
+      "topic": "Houses In Pardesiya",
+      "url": "https://www.yad2.co.il/realestate/rent?minPrice=3000&maxPrice=5000&minEntranceDate=1759276800&priceOnly=1&shelter=1&topArea=19&area=70&city=0171&zoom=15",
+      "disabled": false
     }
   ]
 }
