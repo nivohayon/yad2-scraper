@@ -10,4 +10,8 @@ const getYad2HTML = async (url) => {
   }
 };
 
-module.exports = getYad2HTML;
+const getItemIdFromUrl = (url) => {
+  return url.split("/item/")[1].split("?")[0] ?? "";
+};
+
+module.exports = { getYad2HTML, getItemIdFromUrl };

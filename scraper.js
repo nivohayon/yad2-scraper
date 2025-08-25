@@ -2,12 +2,12 @@ const cheerio = require("cheerio");
 const Telenode = require("telenode-js");
 const fs = require("fs");
 const config = require("./config.json");
-const getYad2Response = require("./getYad2Html");
+const { getYad2HTML, getItemIdFromUrl } = require("./utils");
 require("dotenv").config();
 
 const scrapeItemsAndExtractUrls = async (url) => {
   // Get Yad2 HTML.
-  const yad2Html = await getYad2Response(url);
+  const yad2Html = await getYad2HTML(url);
   if (!yad2Html) {
     throw new Error("Could not get Yad2 response");
   }
@@ -66,6 +66,7 @@ const scrapeAllPagesAndExtractImgUrls = async (baseUrl, maxPages = 0) => {
 
 const checkIfHasNewItem = async (itemUrls, topic) => {
   const filePath = `./data/${topic}.json`;
+  const itemsIds = itemUrls.map(getItemIdFromUrl);
   let savedUrls = [];
   try {
     savedUrls = require(filePath);
@@ -78,24 +79,28 @@ const checkIfHasNewItem = async (itemUrls, topic) => {
       throw new Error(`Could not read / create ${filePath}`);
     }
   }
-  let shouldUpdateFile = false;
-  savedUrls = savedUrls.filter((savedUrl) => {
-    shouldUpdateFile = true;
-    return itemUrls.includes(savedUrl);
+  // Cleaning old saved ids that are no longer present in the new scrape.
+  const savedIds = savedUrls.map(getItemIdFromUrl);
+  savedUrls = savedUrls.filter((_, index) => {
+    const savedItemId = savedIds[index];
+    return itemsIds.includes(savedItemId);
   });
-  const newItems = [];
-  itemUrls.forEach((url) => {
-    if (!savedUrls.includes(url)) {
-      savedUrls.push(url);
-      newItems.push(url);
+  let shouldUpdateFile = false;
+  const newItemsUrls = [];
+  itemUrls.forEach((url, index) => {
+    const itemId = itemsIds[index];
+    if (!savedIds.includes(itemId)) {
       shouldUpdateFile = true;
+      savedUrls.push(url);
+      newItemsUrls.push(url);
+      savedIds.push(itemId);
     }
   });
   if (shouldUpdateFile) {
     const updatedUrls = JSON.stringify(savedUrls, null, 2);
     fs.writeFileSync(filePath, updatedUrls);
   }
-  return newItems;
+  return newItemsUrls;
 };
 
 const scrape = async (topic, url) => {
