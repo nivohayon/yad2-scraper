@@ -2,34 +2,9 @@
   "maxPages": 0,
   "projects": [
     {
-      "topic": "Houses In Netanya",
-      "url": "https://www.yad2.co.il/realestate/rent?minPrice=3000&maxPrice=5000&minEntranceDate=1759276800&priceOnly=1&topArea=19&area=17&city=7400",
+      "topic": "Houses In Dimona",
+      "url": "https://www.yad2.co.il/realestate/rent?minPrice=2000&maxPrice=4000&minFloor=0&minSquaremeter=60&priceOnly=1&topArea=43&area=89&city=2200",
       "disabled": false
-    },
-    {
-      "topic": "Houses Around Netanya",
-      "url": "https://www.yad2.co.il/realestate/rent?minPrice=3000&maxPrice=5000&minEntranceDate=1759276800&sort=near-me&priceOnly=1&topArea=19&area=70",
-      "disabled": false
-    },
-    {
-      "topic": "Houses In Pardesiya",
-      "url": "https://www.yad2.co.il/realestate/rent?minPrice=3000&maxPrice=5000&minEntranceDate=1759276800&priceOnly=1&shelter=1&topArea=19&area=70&city=0171&zoom=15",
-      "disabled": true
-    },
-    {
-      "topic": "Houses In Kadima Zoran",
-      "url": "https://www.yad2.co.il/realestate/rent?minPrice=3000&maxPrice=5000&minEntranceDate=1759276800&priceOnly=1&shelter=1&topArea=19&area=70&city=0195&zoom=13",
-      "disabled": true
-    },
-    {
-      "topic": "Houses In Kfar Yona",
-      "url": "https://www.yad2.co.il/realestate/rent?minPrice=3000&maxPrice=5000&minEntranceDate=1759276800&priceOnly=1&shelter=1&topArea=19&area=70&city=0168&zoom=13",
-      "disabled": true
-    },
-    {
-      "topic": "Houses In Even Yehuda",
-      "url": "https://www.yad2.co.il/realestate/rent?minPrice=3000&maxPrice=5000&minEntranceDate=1759276800&priceOnly=1&shelter=1&topArea=19&area=70&city=0182&zoom=13",
-      "disabled": true
     }
   ]
 }
