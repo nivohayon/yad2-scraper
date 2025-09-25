@@ -21,7 +21,7 @@ const scrapeItemsAndExtractUrls = async (url) => {
 
   // Find all feed items.
   const $feedItems = $(
-    '[data-nagish="feed-item-list-box"][data-testid="item-basic"]'
+    '[data-nagish="feed-item-list-box"][data-testid="item-basic"], [data-nagish="feed-item-list-box"][data-testid="platinum-item"]'
   );
   if (!$feedItems) {
     throw new Error("Could not find feed items");
